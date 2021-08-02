@@ -1,0 +1,10 @@
+.scoreboard-container {
+    display: flex;
+    flex-direction: column;
+    margin-right: 14rem;
+}
+
+.text {
+    font-size: 1.4rem;
+    font-family: 'Patrick Hand', cursive;
+}

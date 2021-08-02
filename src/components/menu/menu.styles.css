@@ -1,0 +1,21 @@
+.menu-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-text {
+    font-family: 'Patrick Hand', cursive;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.sub-menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 6rem;
+    cursor: pointer;
+}
