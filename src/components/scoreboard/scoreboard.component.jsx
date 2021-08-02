@@ -7,14 +7,14 @@ import './scoreboard.styles.css';
 const ScoreBoard = ({player2, scores}) => {
     return (
         <div className="scoreboard-container">
-            <span className="text">Games: {Math.floor(scores[0]/2)}</span>
+            <span className="text">Games: {scores[0]}</span>
             <span className="text">
-                {player2 === "Computer" ? "You" : "Player 1"}: {Math.floor(scores[1]/2)}
+                {player2 === "Computer" ? "You" : "Player 1"}: {scores[1]}
             </span>
             <span className="text">
-                {player2}: {Math.floor(scores[2]/2)}
+                {player2}: {scores[2]}
             </span>
-            <span className="text">Tie: {Math.floor(scores[3]/2)}</span>
+            <span className="text">Tie: {scores[3]}</span>
         </div>
     );
 };
