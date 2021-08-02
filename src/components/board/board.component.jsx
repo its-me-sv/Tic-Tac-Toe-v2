@@ -2,14 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 // Styles
-import './board.styles.css';
+import {BoardContainerStyles} from './board.styles';
 
 // Componets
 import ComponentDecider from '../component-decider/component-decider.component';
 
 const Board = ({playingBoard}) => {
     return (
-        <div className="board-container">
+        <BoardContainerStyles>
             {
                 playingBoard.map(
                     (val, idx) => 
@@ -20,7 +20,7 @@ const Board = ({playingBoard}) => {
                         />
                 )
             }
-        </div>
+        </BoardContainerStyles>
     );
 };
 

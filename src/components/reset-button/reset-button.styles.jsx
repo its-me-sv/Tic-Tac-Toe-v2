@@ -1,4 +1,6 @@
-.reset-button {
+import styled from "styled-components";
+
+export const ResetButtonStyles = styled.div`
     appearance: none;
     border: 1px solid;
     border-radius: 6px;
@@ -20,10 +22,10 @@
     background-color: #da3633;
     border-color: #f85149;
     color: white;
-}
 
-.reset-button:hover {
-    color: #f85149;
-    border-color: #30363d;
-    background-color: #21262d;
-}
+    &:hover {
+        color: #f85149;
+        border-color: #30363d;
+        background-color: #21262d;
+    }
+`;

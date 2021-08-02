@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 // Styles
-import './menu.styles.css';
+import {
+    MenuContainerStyles,
+    TitleTextStyles,
+    SubMenuStyles
+} from "./menu.styles";
 
 // Components
 import Cross from '../cross/cross.component';
@@ -24,37 +28,36 @@ const Menu = ({
 }) => {
     return (
         level === 0 
-        ?   <div className="menu-container">
-                <span className="title-text">Number of Players</span>
-                <div className="sub-menu">
+        ?   <MenuContainerStyles>
+                <TitleTextStyles>Number of Players</TitleTextStyles>
+                <SubMenuStyles>
                     <span onClick={() => setNoOfPlayers(1)}>1</span>
                     <span onClick={() => setNoOfPlayers(2)}>2</span>
-                </div>
-            </div>
-        :   <div className="menu-container">
-                <span className="title-text">
+                </SubMenuStyles>
+            </MenuContainerStyles>
+        :   <MenuContainerStyles>
+                <TitleTextStyles>
                     {
                         player2 === "Computer"
                         ? "You take"
                         : "Player 1 takes"
                     }
-                </span>
-                <div className="sub-menu" style={{marginTop: "2rem"}}>
+                </TitleTextStyles>
+                <SubMenuStyles style={{marginTop: "2rem"}}>
                     <span onClick={() => changePlayerTool("cross")}>
                         <Cross/>
                     </span>
                     <span onClick={() => changePlayerTool("circle")}>
                         <Circle />
                     </span>
-                </div>
-                <span 
-                    className="title-text" 
+                </SubMenuStyles>
+                <TitleTextStyles
                     style={{marginTop: "1rem", cursor: "pointer"}}
                     onClick={() => changeLevel(0)}
                 >
                     &#8592; Back
-                </span>
-            </div>
+                </TitleTextStyles>
+            </MenuContainerStyles>
     );
 };
 

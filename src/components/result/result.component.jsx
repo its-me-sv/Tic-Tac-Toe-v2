@@ -2,7 +2,10 @@ import React from "react";
 import {connect} from "react-redux";
 
 // Styles
-import "./result.styles.css";
+import {
+    ResultContainerStyles,
+    CloseButtonStyles
+} from "./result.styles";
 
 // Action
 import {resetBoard} from "../../redux/board/board.actions";
@@ -22,10 +25,10 @@ const Result = ({winner, boardReset, scoreUpdater}) => {
         message = "Game tied";
     scoreUpdater(getIndex[winner] + 1);
     return (
-        <div className="result-container">
+        <ResultContainerStyles>
             {message}
-            <button onClick={boardReset} className="close-btn">Close</button>
-        </div>
+            <CloseButtonStyles onClick={boardReset}>Close</CloseButtonStyles>
+        </ResultContainerStyles>
     );
 };
 

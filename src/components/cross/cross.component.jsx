@@ -1,13 +1,17 @@
 import React from 'react';
 
 // Styles
-import './cross.styles.css';
+import {CrossStyles} from './cross.styles';
 
-const X = ({clickEvent}) => (
-    <svg width="100" height="100" viewBox="-50 -50 100 100" className="cross" onClick={clickEvent}>
+const Cross = ({clickEvent}) => (
+    <CrossStyles
+        width="100" height="100" 
+        viewBox="-50 -50 100 100" 
+        onClick={clickEvent}
+    >
         <line x1="-40" y1="-40" x2="40" y2="40" />
         <line x1="-40" y1="40" x2="40" y2="-40" />
-    </svg>
+    </CrossStyles>
 );
 
-export default X;
+export default Cross;

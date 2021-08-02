@@ -2,20 +2,23 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 // Styles
-import './scoreboard.styles.css';
+import {
+    ScoreBoardContainerStyles,
+    TextStyles
+} from "./scoreboard.styles";
 
 const ScoreBoard = ({player2, scores}) => {
     return (
-        <div className="scoreboard-container">
-            <span className="text">Games: {scores[0]}</span>
-            <span className="text">
+        <ScoreBoardContainerStyles>
+            <TextStyles>Games: {scores[0]}</TextStyles>
+            <TextStyles>
                 {player2 === "Computer" ? "You" : "Player 1"}: {scores[1]}
-            </span>
-            <span className="text">
+            </TextStyles>
+            <TextStyles>
                 {player2}: {scores[2]}
-            </span>
-            <span className="text">Tie: {scores[3]}</span>
-        </div>
+            </TextStyles>
+            <TextStyles>Tie: {scores[3]}</TextStyles>
+        </ScoreBoardContainerStyles>
     );
 };
 

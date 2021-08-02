@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 
 // Styles
-import "./component-decider.styles.css";
+// import "./component-decider.styles.css";
 
 // Components
 import Square from "../square/square.component";

@@ -2,7 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 // Styles
-import './app.styles.css';
+import {
+    AppContainerStyles,
+    CurrentPlayerStyles
+} from "./app.styles";
 
 // Components
 import Header from '../../components/header/header.component';
@@ -10,7 +13,7 @@ import Menu from '../../components/menu/menu.component';
 import Board from '../../components/board/board.component';
 import ScoreBoard from '../../components/scoreboard/scoreboard.component';
 import ResetButton from '../../components/reset-button/reset-button.component';
-import Result from '../../components/result/result.container';
+import Result from '../../components/result/result.component';
 
 // Functions
 import {detectWinner} from "../../utils";
@@ -18,7 +21,7 @@ import {detectWinner} from "../../utils";
 class App extends React.Component {
     render() {
         const {level, currPlayer, player2} = this.props;
-        const { playingBoard, player1Tool } = this.props;
+        const {playingBoard, player1Tool} = this.props;
         let result = null;
         if (player1Tool !== null) {
             const player2Tool = player1Tool === "circle" ? "cross" : "circle";
@@ -38,7 +41,7 @@ class App extends React.Component {
             }
         }
         return (
-            <div className="app-container">
+            <AppContainerStyles>
                 {result !== null && <Result winner={result}/>}
                 <Header />
                 {
@@ -46,18 +49,18 @@ class App extends React.Component {
                     ? <Menu />
                     : <span>
                         <ScoreBoard />
-                        <span className="current-player">
+                        <CurrentPlayerStyles>
                             {
                                 currPlayer === "Player 1" && player2 === "Computer"
                                 ? "Your turn"
                                 : `${currPlayer}'s turn`
                             }
-                        </span>
+                        </CurrentPlayerStyles>
                         <Board />
                         <ResetButton />
                       </span>
                 }
-            </div>
+            </AppContainerStyles>
         );
     }
 }

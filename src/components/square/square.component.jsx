@@ -1,11 +1,11 @@
 import React from 'react';
 
 // Styles
-import './square.styles.css';
+import {SquareStyles} from "./square.styles";
 
 const Square = ({clickEvent}) => (
-    <div className="square" onClick={clickEvent}>
-    </div>
+    <SquareStyles onClick={clickEvent}>
+    </SquareStyles>
 );
 
 export default Square;

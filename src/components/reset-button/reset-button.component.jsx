@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 // Styles
-import './reset-button.styles.css';
+import {ResetButtonStyles} from "./reset-button.styles";
 
 // Actions
 import {resetMenu} from "../../redux/menu/menu.actions";
@@ -10,8 +10,7 @@ import {resetBoard} from '../../redux/board/board.actions';
 import {resetScore} from "../../redux/score/score.actions";
 
 const ResetButton = ({menuReset, boardReset, scoreReset}) => (
-    <div 
-        className="reset-button"
+    <ResetButtonStyles
         onClick={
             () => {
                 menuReset();
@@ -19,7 +18,7 @@ const ResetButton = ({menuReset, boardReset, scoreReset}) => (
                 scoreReset();
             }
         }
-    >Reset</div>
+    >Reset</ResetButtonStyles>
 );
 
 const mapDispatchToProps = dispatch => ({

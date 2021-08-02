@@ -1,10 +1,10 @@
 import React from 'react';
 
 // Stlyes
-import './header.styles.css';
+import {HeaderTextStyles} from './header.styles';
 
 const Header = () => (
-    <span className="header-text">Tic Tac Toe</span>
+    <HeaderTextStyles>Tic Tac Toe</HeaderTextStyles>
 );
 
 export default Header;

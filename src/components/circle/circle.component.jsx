@@ -1,12 +1,16 @@
 import React from 'react';
 
 // Styles
-import './circle.styles.css'
+import {CircleStyles} from './circle.styles';
 
-const O = ({clickEvent}) => (
-    <svg width="100" height="100" viewBox="-50 -50 100 100" className="circle" onClick={clickEvent}>
+const Circle = ({clickEvent}) => (
+    <CircleStyles 
+        width="100" height="100" 
+        viewBox="-50 -50 100 100" 
+        onClick={clickEvent}
+    >
         <circle cx="0" cy="0" r="40" />
-    </svg>
+    </CircleStyles>
 );
 
-export default O;
+export default Circle;

@@ -1,16 +1,18 @@
-.menu-container {
+import styled from "styled-components";
+
+export const MenuContainerStyles = styled.div`
     margin-top: 2rem;
     display: flex;
     flex-direction: column;
-}
+`;
 
-.title-text {
+export const TitleTextStyles = styled.span`
     font-family: 'Patrick Hand', cursive;
     font-size: 2rem;
     text-align: center;
-}
+`;
 
-.sub-menu {
+export const SubMenuStyles = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
@@ -18,4 +20,4 @@
     margin-right: auto;
     font-size: 6rem;
     cursor: pointer;
-}
+`;
