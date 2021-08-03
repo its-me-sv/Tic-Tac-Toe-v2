@@ -16,30 +16,10 @@ import ResetButton from '../../components/reset-button/reset-button.component';
 import Result from '../../components/result/result.component';
 
 // Functions
-import {detectWinner} from "../../utils";
 
 class App extends React.Component {
     render() {
-        const {level, currPlayer, player2} = this.props;
-        const {playingBoard, player1Tool} = this.props;
-        let result = null;
-        if (player1Tool !== null) {
-            const player2Tool = player1Tool === "circle" ? "cross" : "circle";
-            result = detectWinner([...playingBoard], player1Tool, player2Tool);
-            switch (result) {
-                case player1Tool:
-                    result = player2 === "Computer" ? "You" : "Player 1";
-                    break;
-                case player2Tool:
-                    result = player2;
-                    break;
-                case "tie":
-                    result = "tie";
-                    break;
-                default:
-                    break;
-            }
-        }
+        const {level, currPlayer, player2, result} = this.props;
         return (
             <AppContainerStyles>
                 {result !== null && <Result winner={result}/>}
@@ -65,12 +45,13 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = ({menu, board}) => ({
+const mapStateToProps = ({menu, board, score}) => ({
     level: menu.menuLevel,
     currPlayer: board.currentPlayer,
     player2: menu.player2,
     player1Tool: menu.player1Tool,
-    playingBoard: board.board
+    playingBoard: board.board,
+    result: score.result
 });
 
 export default connect(mapStateToProps)(App);

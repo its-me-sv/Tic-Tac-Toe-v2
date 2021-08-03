@@ -1,7 +1,8 @@
 import scoreTypes from "./score.types";
 
 const INITIAL_STATE = {
-    scoreArray: [0, 0, 0, 0]
+    scoreArray: [0, 0, 0, 0],
+    result: null
 };
 
 const scoreReducer = (state =INITIAL_STATE, action) => {
@@ -18,7 +19,13 @@ const scoreReducer = (state =INITIAL_STATE, action) => {
         case scoreTypes.RESET_SCORE:
             return {
                 ...state,
-                scoreArray: [0, 0, 0, 0]
+                scoreArray: [0, 0, 0, 0],
+                result: null
+            };
+        case scoreTypes.UPDATE_RESULT:
+            return {
+                ...state,
+                result: action.payload
             };
         default:
             return state;

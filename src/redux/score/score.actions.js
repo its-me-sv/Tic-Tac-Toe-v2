@@ -8,3 +8,8 @@ export const updateScore = val => ({
 export const resetScore = () => ({
     type: scoreTypes.RESET_SCORE
 });
+
+export const updateResult = val => ({
+    type: scoreTypes.UPDATE_RESULT,
+    payload: val
+});

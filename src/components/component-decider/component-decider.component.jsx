@@ -14,11 +14,13 @@ import {
     updateBoard,
     updatePlayer
 } from "../../redux/board/board.actions";
+import {updateResult} from "../../redux/score/score.actions";
 
 // Functions
 import {
     calculateResponse,
-    sleep
+    sleep,
+    detectWinner
 } from "../../utils";
 
 class ComponentDecider extends React.Component {
@@ -30,7 +32,8 @@ class ComponentDecider extends React.Component {
             playingBoard,
             currPlayer,
             player1Tool,
-            player2
+            player2,
+            setResult
         } = this.props;
         if (playingBoard[pos] !== 0)
             return;
@@ -42,21 +45,43 @@ class ComponentDecider extends React.Component {
         updateBoard(pos, tool);
         let nextPlayer = currPlayer === "Player 1" ? player2 : "Player 1";
         updatePlayer(nextPlayer);
+        let boardCopy =[...playingBoard];
+        boardCopy[pos] = tool;
         if (nextPlayer === "Computer") {
-            let boardCopy =[...playingBoard];
-            boardCopy[pos] = tool;
             let computerTool = player1Tool === "circle" ? "cross" : "circle";
             let response = calculateResponse(
                 boardCopy, 
                 computerTool,
                 player1Tool
             );
-            if (response === -1)
+            if (response === -1) {
+                setResult("tie");
                 return;
-            await sleep(500);
+            }
+            await sleep(200);
+            boardCopy[response] = computerTool;
             updateBoard(response, computerTool);
             updatePlayer("Player 1");
         }
+        let calculatedResult = null;
+        
+        const player2Tool = player1Tool === "circle" ? "cross" : "circle";
+        calculatedResult = detectWinner([...boardCopy], player1Tool, player2Tool);
+        switch (calculatedResult) {
+            case player1Tool:
+                calculatedResult = player2 === "Computer" ? "You" : "Player 1";
+                break;
+            case player2Tool: 
+                calculatedResult = player2;
+                break;
+            case "tie": 
+                calculatedResult = "tie";
+                break;
+            default:
+                break;
+        }
+        setResult(calculatedResult);
+
     }
 
     render() {
@@ -81,7 +106,8 @@ const mapStateToProps = ({board, menu}) => ({
 
 const mapDispatchToProps = dispatch => ({
     updateBoard: (pos, val) => dispatch(updateBoard(pos, val)),
-    updatePlayer: val => dispatch(updatePlayer(val))
+    updatePlayer: val => dispatch(updatePlayer(val)),
+    setResult: val => dispatch(updateResult(val))
 });
 
 export default connect(

@@ -9,7 +9,7 @@ import {
 
 // Action
 import {resetBoard} from "../../redux/board/board.actions";
-import {updateScore} from "../../redux/score/score.actions";
+import {updateScore, updateResult} from "../../redux/score/score.actions";
 
 const getIndex = {
     "Player 1": 0,
@@ -19,7 +19,7 @@ const getIndex = {
     "tie": 2
 };
 
-const Result = ({winner, boardReset, scoreUpdater}) => {
+const Result = ({winner, boardReset, scoreUpdater, resultReset}) => {
     let message = `${winner} won the game`;
     if (winner === "tie")
         message = "Game tied";
@@ -27,14 +27,22 @@ const Result = ({winner, boardReset, scoreUpdater}) => {
     return (
         <ResultContainerStyles>
             {message}
-            <CloseButtonStyles onClick={boardReset}>Close</CloseButtonStyles>
+            <CloseButtonStyles 
+                onClick={
+                    () => {
+                        boardReset();
+                        resultReset();
+                    }
+                }
+            >Close</CloseButtonStyles>
         </ResultContainerStyles>
     );
 };
 
 const mapDispatchToProps = dispatch => ({
     boardReset: () => dispatch(resetBoard()),
-    scoreUpdater: idx => dispatch(updateScore(idx))
+    scoreUpdater: idx => dispatch(updateScore(idx)),
+    resultReset: () => dispatch(updateResult(null))
 });
 
 export default connect(
