@@ -24,6 +24,30 @@ import {
 } from "../../utils";
 
 class ComponentDecider extends React.Component {
+    winnerChecker = (player1Tool, boardCopy, player2) => {
+        const {setResult} = this.props;
+        let calculatedResult = null;
+        
+        const player2Tool = player1Tool === "circle" ? "cross" : "circle";
+        calculatedResult = detectWinner([...boardCopy], player1Tool, player2Tool);
+        switch (calculatedResult) {
+            case player1Tool:
+                calculatedResult = player2 === "Computer" ? "You" : "Player 1";
+                break;
+            case player2Tool: 
+                calculatedResult = player2;
+                break;
+            case "tie": 
+                calculatedResult = "tie";
+                break;
+            default:
+                break;
+        }
+        setResult(calculatedResult);
+        console.log(calculatedResult);
+        return calculatedResult;
+    }
+
     handleClick = async () => {
         const {
             pos,
@@ -47,6 +71,8 @@ class ComponentDecider extends React.Component {
         updatePlayer(nextPlayer);
         let boardCopy =[...playingBoard];
         boardCopy[pos] = tool;
+        let temp = this.winnerChecker(player1Tool, [...boardCopy], player2);
+        if (temp !== null) return;
         if (nextPlayer === "Computer") {
             let computerTool = player1Tool === "circle" ? "cross" : "circle";
             let response = calculateResponse(
@@ -62,25 +88,9 @@ class ComponentDecider extends React.Component {
             boardCopy[response] = computerTool;
             updateBoard(response, computerTool);
             updatePlayer("Player 1");
+            temp = this.winnerChecker(player1Tool, [...boardCopy], player2);
+            if (temp !== null) return;
         }
-        let calculatedResult = null;
-        
-        const player2Tool = player1Tool === "circle" ? "cross" : "circle";
-        calculatedResult = detectWinner([...boardCopy], player1Tool, player2Tool);
-        switch (calculatedResult) {
-            case player1Tool:
-                calculatedResult = player2 === "Computer" ? "You" : "Player 1";
-                break;
-            case player2Tool: 
-                calculatedResult = player2;
-                break;
-            case "tie": 
-                calculatedResult = "tie";
-                break;
-            default:
-                break;
-        }
-        setResult(calculatedResult);
 
     }
 
