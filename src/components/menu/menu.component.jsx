@@ -11,6 +11,7 @@ import {
 // Components
 import Cross from '../cross/cross.component';
 import Circle from '../circle/circle.component';
+import PlayersNames from '../players-name/players-name.component';
 
 // Actions
 import {
@@ -24,7 +25,8 @@ const Menu = ({
     setNoOfPlayers, 
     changeLevel, 
     changePlayerTool,
-    player2
+    player2,
+    p1Name
 }) => {
     return (
         level === 0 
@@ -36,11 +38,12 @@ const Menu = ({
                 </SubMenuStyles>
             </MenuContainerStyles>
         :   <MenuContainerStyles>
+                {player2 !== "Computer" && <PlayersNames />}
                 <TitleTextStyles>
                     {
                         player2 === "Computer"
                         ? "You take"
-                        : "Player 1 takes"
+                        : `${p1Name} takes`
                     }
                 </TitleTextStyles>
                 <SubMenuStyles style={{marginTop: "2rem"}}>
@@ -61,9 +64,10 @@ const Menu = ({
     );
 };
 
-const mapStateToProps = ({menu}) => ({
+const mapStateToProps = ({menu, players}) => ({
     level: menu.menuLevel,
-    player2: menu.player2
+    player2: menu.player2,
+    p1Name: players.player1Name
 });
 
 const mapDispachToProps = dispatch => ({

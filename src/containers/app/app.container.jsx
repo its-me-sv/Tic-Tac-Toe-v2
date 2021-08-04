@@ -18,8 +18,22 @@ import Result from '../../components/result/result.component';
 // Functions
 
 class App extends React.Component {
+    nameToPrint = () => {
+        const {currPlayer, player2, p1Name, p2Name} = this.props;
+        if (currPlayer === "Player 1" && player2 === "Computer")
+            return "Your";
+        if (currPlayer === "Player 1" && player2 === "Player 2")
+            return p1Name.length < 1 || p1Name.trim() === ""
+                ? "Player 1"
+                : p1Name;
+        if (currPlayer === "Player 2")
+            return p2Name.length < 1 || p2Name.trim() === ""
+                ? "Player 2"
+                : p2Name;
+    }
+
     render() {
-        const {level, currPlayer, player2, result} = this.props;
+        const {level, result} = this.props;
         return (
             <AppContainerStyles>
                 {result !== null && <Result winner={result}/>}
@@ -30,11 +44,7 @@ class App extends React.Component {
                     : <span>
                         <ScoreBoard />
                         <CurrentPlayerStyles>
-                            {
-                                currPlayer === "Player 1" && player2 === "Computer"
-                                ? "Your turn"
-                                : `${currPlayer}'s turn`
-                            }
+                            {`${this.nameToPrint()}'s turn`}
                         </CurrentPlayerStyles>
                         <Board />
                         <ResetButton />
@@ -45,13 +55,15 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = ({menu, board, score}) => ({
+const mapStateToProps = ({menu, board, score, players}) => ({
     level: menu.menuLevel,
     currPlayer: board.currentPlayer,
     player2: menu.player2,
     player1Tool: menu.player1Tool,
     playingBoard: board.board,
-    result: score.result
+    result: score.result,
+    p1Name: players.player1Name,
+    p2Name: players.player2Name
 });
 
 export default connect(mapStateToProps)(App);

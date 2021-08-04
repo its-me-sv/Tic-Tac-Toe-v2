@@ -19,14 +19,22 @@ const getIndex = {
     "tie": 2
 };
 
-const Result = ({winner, boardReset, scoreUpdater, resultReset}) => {
-    let message = `${winner} won the game`;
-    if (winner === "tie")
-        message = "Game tied";
+const Result = ({winner, boardReset, scoreUpdater, resultReset, p1Name, p2Name}) => {
+    const messageToPrint = () => {
+        if (winner === "tie")
+            return "Game tied";
+        let dood = winner;
+        if (winner === "Player 1")
+            dood = p1Name.length < 1 || p1Name.trim() === "" ? "Player 1" : p1Name;
+        else if (winner === "Player 2")
+            dood = p2Name.length < 1 || p2Name.trim() === "" ? "Player 2" : p2Name;
+        return `${dood} won the game`
+    };
+
     scoreUpdater(getIndex[winner] + 1);
     return (
         <ResultContainerStyles>
-            {message}
+            {messageToPrint()}
             <CloseButtonStyles 
                 onClick={
                     () => {
@@ -39,6 +47,11 @@ const Result = ({winner, boardReset, scoreUpdater, resultReset}) => {
     );
 };
 
+const mapStateToProps = ({players}) => ({
+    p1Name: players.player1Name,
+    p2Name: players.player2Name
+});
+
 const mapDispatchToProps = dispatch => ({
     boardReset: () => dispatch(resetBoard()),
     scoreUpdater: idx => dispatch(updateScore(idx)),
@@ -46,6 +59,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(Result);

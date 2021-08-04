@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MenuContainerStyles = styled.div`
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
 `;
