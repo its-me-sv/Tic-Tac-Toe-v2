@@ -4,3 +4,5 @@
 * User can choose between 1 player and 2 players
 * Freedom to choose X or O
 * Scoreboard
+* The game board and the scoreboard remains the same even after refreshing or closing the tab
+* Reset button to reset the entire app
