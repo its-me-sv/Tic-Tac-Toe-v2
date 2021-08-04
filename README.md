@@ -6,3 +6,4 @@
 * Scoreboard
 * The game board and the scoreboard remains the same even after refreshing or closing the tab
 * Reset button to reset the entire app
+* Players can name them for 2 players mode (max len: 8 characters)
