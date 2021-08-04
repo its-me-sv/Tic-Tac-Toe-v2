@@ -1,9 +1,18 @@
 import {combineReducers} from "redux";
+import {persistReducer} from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
 // Reducers
 import menuReducer from "./menu/menu.reducer";
 import boardReducer from "./board/board.reducer";
 import scoreReducer from "./score/score.reducer";
+
+// Persist Configuration
+const persistConfig = {
+    key: 'root',
+    storage,
+    whitelist: ['menu', 'board', 'score']
+};
 
 const rootReducer = combineReducers({
     menu: menuReducer,
@@ -11,4 +20,4 @@ const rootReducer = combineReducers({
     score: scoreReducer
 });
 
-export default rootReducer;
+export default persistReducer(persistConfig, rootReducer);
