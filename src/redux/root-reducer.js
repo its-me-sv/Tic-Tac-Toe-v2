@@ -7,6 +7,7 @@ import menuReducer from "./menu/menu.reducer";
 import boardReducer from "./board/board.reducer";
 import scoreReducer from "./score/score.reducer";
 import playersReducers from "./players/players.reducer";
+import multiplayerReducer from "./multiplayer/multiplayer.reducer";
 
 // Persist Configuration
 const persistConfig = {
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
     menu: menuReducer,
     board: boardReducer,
     score: scoreReducer,
-    players: playersReducers
+    players: playersReducers,
+    multiplayer: multiplayerReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);

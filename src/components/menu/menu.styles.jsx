@@ -19,5 +19,15 @@ export const SubMenuStyles = styled.div`
     margin-left: auto;
     margin-right: auto;
     font-size: 6rem;
+`;
+
+export const PlayOnline = styled.div`
     cursor: pointer;
+    margin-top: 1rem;
+    margin-left: 0.5rem;
+    background-color: #238636;
+    font-size: 1.8rem;
+    padding: 0.4rem;
+    align-self: center;
+    border-radius: 2rem;
 `;

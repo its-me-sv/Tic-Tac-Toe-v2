@@ -7,16 +7,19 @@ import {BoardContainerStyles} from './board.styles';
 // Componets
 import ComponentDecider from '../component-decider/component-decider.component';
 
-const Board = ({playingBoard}) => {
+const Board = ({playingBoard, playingBoard2, multiplayer, socket}) => {
+    let boardToUse = multiplayer === true ? playingBoard2 : playingBoard;
     return (
         <BoardContainerStyles>
             {
-                playingBoard.map(
+                boardToUse.map(
                     (val, idx) => 
                         <ComponentDecider
                             key={idx}
                             val={val}
                             pos={idx}
+                            isMultiplayer={multiplayer}
+                            socket={socket}
                         />
                 )
             }
@@ -24,8 +27,9 @@ const Board = ({playingBoard}) => {
     );
 };
 
-const mapStateToProps = ({board}) => ({
-    playingBoard: board.board
+const mapStateToProps = ({board, multiplayer}) => ({
+    playingBoard: board.board,
+    playingBoard2: multiplayer.board
 });
 
 export default connect(

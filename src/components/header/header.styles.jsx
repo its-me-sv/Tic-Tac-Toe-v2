@@ -5,4 +5,5 @@ export const HeaderTextStyles = styled.span`
     font-size: 3.6rem;
     color: rgb(28, 144, 221);
     text-align: center;
+    cursor: pointer;
 `;

@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 // Styles
 import {
     MenuContainerStyles,
     TitleTextStyles,
-    SubMenuStyles
+    SubMenuStyles,
+    PlayOnline
 } from "./menu.styles";
 
 // Components
@@ -26,16 +28,20 @@ const Menu = ({
     changeLevel, 
     changePlayerTool,
     player2,
-    p1Name
+    p1Name,
 }) => {
+    const history = useHistory();
     return (
         level === 0 
         ?   <MenuContainerStyles>
                 <TitleTextStyles>Number of Players</TitleTextStyles>
                 <SubMenuStyles>
-                    <span onClick={() => setNoOfPlayers(1)}>1</span>
-                    <span onClick={() => setNoOfPlayers(2)}>2</span>
+                    <span style={{cursor: "pointer"}} onClick={() => setNoOfPlayers(1)}>1</span>
+                    <span style={{cursor: "pointer"}} onClick={() => setNoOfPlayers(2)}>2</span>
                 </SubMenuStyles>
+                <PlayOnline
+                    onClick={() => history.push("/multiplayer")}
+                >Play Online</PlayOnline>
             </MenuContainerStyles>
         :   <MenuContainerStyles>
                 {player2 !== "Computer" && <PlayersNames />}
