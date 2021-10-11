@@ -7,7 +7,7 @@ import Room from "../../Pages/Room/Room.page";
 class App extends React.Component {
     render() {
         return (
-            <HashRouter basename={process.env.PUBLIC_URL || ''}>
+            <HashRouter basename='/'>
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/multiplayer/rooms/:roomId" component={Room} />
