@@ -1,6 +1,6 @@
 import {combineReducers} from "redux";
-import {persistReducer} from "redux-persist";
-import storage from "redux-persist/lib/storage";
+// import {persistReducer} from "redux-persist";
+// import storage from "redux-persist/lib/storage";
 
 // Reducers
 import menuReducer from "./menu/menu.reducer";
@@ -10,11 +10,11 @@ import playersReducers from "./players/players.reducer";
 import multiplayerReducer from "./multiplayer/multiplayer.reducer";
 
 // Persist Configuration
-const persistConfig = {
-    key: 'root',
-    storage,
-    whitelist: ['menu', 'board', 'score', 'players']
-};
+// const persistConfig = {
+//     key: 'root',
+//     storage,
+//     whitelist: ['menu', 'board', 'score', 'players']
+// };
 
 const rootReducer = combineReducers({
     menu: menuReducer,
@@ -24,4 +24,5 @@ const rootReducer = combineReducers({
     multiplayer: multiplayerReducer
 });
 
-export default persistReducer(persistConfig, rootReducer);
+// export default persistReducer(persistConfig, rootReducer);
+export default rootReducer;
