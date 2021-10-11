@@ -78,4 +78,7 @@ export const CurrentPlayerStyles = styled.span`
     font-size: 2rem;
     margin-top: 1rem;
     margin-bottom: 0rem;
+    @media only screen and (max-width: 768px) {
+        margin-top: 0rem;
+    }
 `;
