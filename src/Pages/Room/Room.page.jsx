@@ -45,7 +45,7 @@ class Room extends React.Component {
         this.socket.on("roomFull", () => {
             this.props.setRoomId("");
             window.alert("Room Full");
-            this.props.history.push("/Tic-Tac-Toe-v2/multiplayer");
+            this.props.history.push("/multiplayer");
         });
         const {setId, setWeapon, setChance, setP2} = this.props;
         this.socket.on("first", sockId => {

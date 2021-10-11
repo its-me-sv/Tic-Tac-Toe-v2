@@ -34,7 +34,7 @@ function Result2({resetOnline, result, weapon, player2}) {
             <CloseButtonStyles
                 onClick={() => {
                     resetOnline();
-                    history.push("/Tic-Tac-Toe-v2/multiplayer");
+                    history.push("/multiplayer");
                 }}
             >Close</CloseButtonStyles>
         </ResultContainerStyles>
