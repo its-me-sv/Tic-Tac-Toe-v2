@@ -11,19 +11,30 @@ import {
     resetMultiplayer
 } from "../../redux/multiplayer/multiplayer.actions";
 
+import {playSound} from "../../utils";
+
 function Result2({resetOnline, result, weapon, player2}) {
     const history = useHistory();
     let message;
-    if (result === "tie") message = "Game Tied";
-    else if (result === weapon) message = "You Won the Game";
-    else message = `${player2} Won the Game`;
+    if (result === "tie") {
+        message = "Game Tied";
+        playSound("tie");
+    }
+    else if (result === weapon) {
+        message = "You Won the Game";
+        playSound("win");
+    }
+    else {
+        message = `${player2} Won the Game`;
+        playSound("lost");
+    }
     return (
         <ResultContainerStyles>
             {message}
             <CloseButtonStyles
                 onClick={() => {
                     resetOnline();
-                    history.push("/");
+                    history.push("/multiplayer");
                 }}
             >Close</CloseButtonStyles>
         </ResultContainerStyles>

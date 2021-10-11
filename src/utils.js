@@ -115,3 +115,11 @@ export function detectWinner(p, HUMAN, COMPUTER, EMPTY = 0) {
         return "tie";
     return null;
 }
+
+export const playSound = pos => {
+    let audio = document.getElementById(pos);
+    console.log(audio);
+    audio.currentTime = 0;
+    audio.volume = 1;
+    audio.play();
+};
