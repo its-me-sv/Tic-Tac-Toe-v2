@@ -9,9 +9,9 @@ class App extends React.Component {
     render() {
         return (
             <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route exact path="/multiplayer" component={Multiplayer} />
-                <Route path="/multiplayer/rooms/:roomId" component={Room} />
+                <Route exact path="/Tic-Tac-Toe-v2" component={Home}/>
+                <Route exact path="/Tic-Tac-Toe-v2/multiplayer" component={Multiplayer} />
+                <Route exact path="/Tic-Tac-Toe-v2/multiplayer/rooms/:roomId" component={Room} />
             </Switch>
         );
     }

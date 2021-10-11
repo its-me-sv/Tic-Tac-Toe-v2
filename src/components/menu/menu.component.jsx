@@ -40,7 +40,7 @@ const Menu = ({
                     <span style={{cursor: "pointer"}} onClick={() => setNoOfPlayers(2)}>2</span>
                 </SubMenuStyles>
                 <PlayOnline
-                    onClick={() => history.push("/multiplayer")}
+                    onClick={() => history.push("/Tic-Tac-Toe-v2/multiplayer")}
                 >Play Online</PlayOnline>
             </MenuContainerStyles>
         :   <MenuContainerStyles>

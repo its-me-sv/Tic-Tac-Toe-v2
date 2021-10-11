@@ -18,7 +18,7 @@ import {
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="/Tic-Tac-Toe-v2">
+    <BrowserRouter>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           <App />
