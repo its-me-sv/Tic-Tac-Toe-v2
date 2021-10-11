@@ -10,6 +10,7 @@ import {
 // Action
 import {resetBoard} from "../../redux/board/board.actions";
 import {updateScore, updateResult} from "../../redux/score/score.actions";
+import {playSound} from "../../utils";
 
 const getIndex = {
     "Player 1": 0,
@@ -21,13 +22,16 @@ const getIndex = {
 
 const Result = ({winner, boardReset, scoreUpdater, resultReset, p1Name, p2Name}) => {
     const messageToPrint = () => {
-        if (winner === "tie")
+        if (winner === "tie") {
+            playSound("tie");
             return "Game tied";
+        }
         let dood = winner;
         if (winner === "Player 1")
             dood = p1Name.length < 1 || p1Name.trim() === "" ? "Player 1" : p1Name;
         else if (winner === "Player 2")
             dood = p2Name.length < 1 || p2Name.trim() === "" ? "Player 2" : p2Name;
+        playSound("win");
         return `${dood} won the game`
     };
 
