@@ -14,6 +14,7 @@ import {
 
 import Board from "../../components/board/board.component";
 import Result2 from "../../components/result2/result2.component";
+import {ReactComponent as Loader} from "../../assets/Loader.svg";
 
 import {
     setCurrName,
@@ -30,13 +31,16 @@ import {
 class Room extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            connected: false
+        };
         this.props.setRoomId(props.match.params.roomId);
         this.socket = null;
     }
     
     componentDidMount() {
         this.socket = io("https://desolate-island-20928.herokuapp.com/");
-        this.socket.on("connect", () => console.log(this.socket.id));
+        this.socket.on("connect", () => this.setState({connected: true}));
         this.socket.emit("joinRoom", this.props.match.params.roomId);
         this.socket.on("roomFull", () => {
             this.props.setRoomId("");
@@ -87,36 +91,49 @@ class Room extends React.Component {
 
     render() {
         const {currName, player2, roomId, result} = this.props;
+        const {connected} = this.state;
         return (
             <RoomContainerStyles>
                 {result !== null && <Result2 />}
-                <RoomTitleStyles>{roomId}</RoomTitleStyles>
-                <PlayerStyles>
-                    <LabelStyles>Player 1</LabelStyles>
-                    <PlayerNameStyles 
-                        type="text" 
-                        value={currName}
-                        onChange={this.handleNameChange}
-                    />
-                    <UpdateButtonStyles
-                        onClick={this.handleNameUpdate}
-                    >Update</UpdateButtonStyles>
-                </PlayerStyles>
-                <PlayerStyles>
-                    <LabelStyles>Player 2</LabelStyles>
-                    <PlayerNameStyles
-                        type="text" 
-                        value={player2} 
-                        readOnly={true}
-                    />
-                    <UpdateButtonStyles disabled={true}>Update</UpdateButtonStyles>
-                </PlayerStyles>
-                <BoardContainerStyles>
-                    <Board 
-                        multiplayer={true}
-                        socket={this.socket}
-                    />
-                </BoardContainerStyles>
+                {
+                    connected 
+                    ? (
+                        <>
+                                <RoomTitleStyles>{roomId}</RoomTitleStyles>
+                                <PlayerStyles>
+                                    <LabelStyles>Player 1</LabelStyles>
+                                    <PlayerNameStyles
+                                        type="text"
+                                        value={currName}
+                                        onChange={this.handleNameChange}
+                                    />
+                                    <UpdateButtonStyles
+                                        onClick={this.handleNameUpdate}
+                                    >Update</UpdateButtonStyles>
+                                </PlayerStyles>
+                                <PlayerStyles>
+                                    <LabelStyles>Player 2</LabelStyles>
+                                    <PlayerNameStyles
+                                        type="text"
+                                        value={player2}
+                                        readOnly={true}
+                                    />
+                                    <UpdateButtonStyles disabled={true}>Update</UpdateButtonStyles>
+                                </PlayerStyles>
+                                <BoardContainerStyles>
+                                    <Board
+                                        multiplayer={true}
+                                        socket={this.socket}
+                                    />
+                                </BoardContainerStyles>
+                        </>
+                    ) : (
+                        <>
+                            <Loader />
+                            <LabelStyles>Connecting to Server...</LabelStyles>
+                        </>
+                    )
+                }
             </RoomContainerStyles>
         );
     }
