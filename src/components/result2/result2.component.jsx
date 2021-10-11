@@ -1,6 +1,6 @@
 import React from "react";
-import {useHistory} from "react-router-dom";
 import {connect} from "react-redux";
+import {useHistory} from "react-router-dom";
 
 import {
     ResultContainerStyles,
@@ -8,12 +8,12 @@ import {
 } from "./result2.styles";
 
 import {
-    resetMultiplayer
+    newGame
 } from "../../redux/multiplayer/multiplayer.actions";
 
 import {playSound} from "../../utils";
 
-function Result2({resetOnline, result, weapon, player2}) {
+function Result2({newGame, result, weapon, player2, left}) {
     const history = useHistory();
     let message;
     if (result === "tie") {
@@ -28,13 +28,14 @@ function Result2({resetOnline, result, weapon, player2}) {
         message = `${player2} Won the Game`;
         playSound("lost");
     }
+    if (left === true) message = `${player2} left the Game`;
     return (
         <ResultContainerStyles>
             {message}
             <CloseButtonStyles
                 onClick={() => {
-                    resetOnline();
-                    history.push("/multiplayer");
+                    if (left === true) history.push("/");
+                    else newGame();
                 }}
             >Close</CloseButtonStyles>
         </ResultContainerStyles>
@@ -46,7 +47,7 @@ const mapStateToProps = ({multiplayer}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    resetOnline: () => dispatch(resetMultiplayer())
+    newGame: () => dispatch(newGame())
 });
 
 export default connect(

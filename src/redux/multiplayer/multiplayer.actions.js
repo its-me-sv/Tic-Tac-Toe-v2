@@ -42,3 +42,12 @@ export const setResult = result => ({
     type: multiplayerTypes.SET_RESULT,
     payload: result
 });
+
+export const updateState = obj => ({
+    type: multiplayerTypes.UPDATE_STATE,
+    payload: {...obj}
+});
+
+export const newGame = () => ({
+    type: multiplayerTypes.NEW_GAME
+});

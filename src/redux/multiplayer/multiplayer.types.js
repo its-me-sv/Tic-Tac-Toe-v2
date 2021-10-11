@@ -7,7 +7,9 @@ const multiplayerTypes = {
     SET_CHANCE: "SET_CHANCE",
     RESET_MULTIPLAYER: "RESET_MULTIPLAYER",
     SET_ROOM_ID: "SET_ROOM_ID",
-    SET_RESULT: "SET_RESULT"
+    SET_RESULT: "SET_RESULT",
+    UPDATE_STATE: "UPDATE_STATE",
+    NEW_GAME: "NEW_GAME"
 };
 
 export default multiplayerTypes;

@@ -33,6 +33,10 @@ const multiplayerReducer = (state = INITIAL_STATE, action) => {
             return {...state, isChance: !state.isChance};
         case multiplayerTypes.SET_RESULT:
             return {...state, result: payload};
+        case multiplayerTypes.UPDATE_STATE:
+            return {...state, ...payload};
+        case multiplayerTypes.NEW_GAME:
+            return {...state, board: [0, 0, 0, 0, 0, 0, 0, 0, 0], result: null};
         case multiplayerTypes.RESET_MULTIPLAYER:
             return {
                 currName: "Player 1",

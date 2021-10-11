@@ -25,21 +25,26 @@ import {
     setChance,
     resetMultiplayer,
     setRoomId,
-    setResult
+    setResult,
+    updateState
 } from "../../redux/multiplayer/multiplayer.actions";
 
 class Room extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            connected: false
+            connected: false,
+            playerLeft: false
         };
         this.props.setRoomId(props.match.params.roomId);
         this.socket = null;
     }
     
     componentDidMount() {
-        this.socket = io("https://desolate-island-20928.herokuapp.com/");
+        let socketUrl = process.env.NODE_ENV === 'development' 
+                        ? "http://localhost:5000/" 
+                        : "https://desolate-island-20928.herokuapp.com/";
+        this.socket = io(socketUrl);
         this.socket.on("connect", () => this.setState({connected: true}));
         this.socket.emit("joinRoom", this.props.match.params.roomId);
         this.socket.on("roomFull", () => {
@@ -67,11 +72,30 @@ class Room extends React.Component {
         this.socket.on("gameResult", ({result}) => {
             this.props.setResult(result);
         });
+        this.socket.on("newPlayer", rmId => {
+            window.alert(`${this.props.player2} has joined the game`);
+            const {currName, board} = this.props;
+            const playerData = {
+                player2: currName,
+                board,
+                isChance: !this.props.isChance
+            };
+            const dataToSend = {
+                playerData,
+                roomId: rmId
+            };
+            this.socket.emit("newPlayer", {...dataToSend});
+        });
+        this.socket.on("updateState", stateObj => this.props.updateState(stateObj));
+        this.socket.on("playerLeft", async () => {
+            this.setState({playerLeft: true});
+        });
     }
 
     componentWillUnmount() {
         const {reset} = this.props;
         reset();
+        this.socket.emit("playerLeft");
         this.socket.disconnect();
     }
 
@@ -91,17 +115,24 @@ class Room extends React.Component {
 
     render() {
         const {currName, player2, roomId, result} = this.props;
-        const {connected} = this.state;
+        const {connected, playerLeft} = this.state;
         return (
             <RoomContainerStyles>
                 {result !== null && <Result2 />}
+                {playerLeft && <Result2 left={true}/>}
                 {
                     connected 
                     ? (
                         <>
                                 <RoomTitleStyles>{roomId}</RoomTitleStyles>
                                 <PlayerStyles>
-                                    <LabelStyles>Player 1</LabelStyles>
+                                    <LabelStyles style={
+                                        {
+                                            color: "green",
+                                            marginLeft: "2rem",
+                                            marginRight: "1rem"
+                                        }
+                                    }>You</LabelStyles>
                                     <PlayerNameStyles
                                         type="text"
                                         value={currName}
@@ -112,7 +143,9 @@ class Room extends React.Component {
                                     >Update</UpdateButtonStyles>
                                 </PlayerStyles>
                                 <PlayerStyles>
-                                    <LabelStyles>Player 2</LabelStyles>
+                                    <LabelStyles
+                                        style={{color: "red"}}
+                                    >Opponent</LabelStyles>
                                     <PlayerNameStyles
                                         type="text"
                                         value={player2}
@@ -152,7 +185,8 @@ const mapDispatchToProps = dispatch => ({
     setChance: () => dispatch(setChance()),
     reset: () => dispatch(resetMultiplayer()),
     setRoomId: id => dispatch(setRoomId(id)),
-    setResult: res => dispatch(setResult(res))
+    setResult: res => dispatch(setResult(res)),
+    updateState: obj => dispatch(updateState({...obj}))
 });
 
 export default connect(
