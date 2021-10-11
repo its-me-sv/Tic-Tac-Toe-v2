@@ -10,8 +10,8 @@ class App extends React.Component {
         return (
             <Switch>
                 <Route exact path="/" component={Home}/>
-                <Route exact path="/multiplayer" component={Multiplayer} />
                 <Route exact path="/multiplayer/rooms/:roomId" component={Room} />
+                <Route path="/multiplayer" component={Multiplayer} />
             </Switch>
         );
     }
