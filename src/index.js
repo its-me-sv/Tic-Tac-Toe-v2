@@ -7,20 +7,20 @@ import './index.css';
 // Components
 import App from './containers/app/app.container';
 import {Provider} from 'react-redux';
-import {PersistGate} from 'redux-persist/integration/react';
+// import {PersistGate} from 'redux-persist/integration/react';
 
 // Redux Store
 import {
   store,
-  persistor
+  // persistor
 } from './redux/store';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
+      {/* <PersistGate persistor={persistor}> */}
         <App />
-      </PersistGate>
+      {/* </PersistGate> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
