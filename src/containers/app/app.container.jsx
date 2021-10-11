@@ -1,7 +1,6 @@
 import React from 'react';
 import {Switch, Route, BrowserRouter as Router, Redirect} from "react-router-dom";
 
-// Components
 import Home from "../../Pages/Home/home.page";
 import Multiplayer from "../../Pages/Multiplayer/Multiplayer.page";
 import Room from "../../Pages/Room/Room.page";
