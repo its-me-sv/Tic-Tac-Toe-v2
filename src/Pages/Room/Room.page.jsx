@@ -9,7 +9,8 @@ import {
     LabelStyles,
     PlayerNameStyles,
     UpdateButtonStyles,
-    BoardContainerStyles
+    BoardContainerStyles,
+    CurrentPlayerStyles
 } from "./Room.styles";
 
 import Board from "../../components/board/board.component";
@@ -73,7 +74,6 @@ class Room extends React.Component {
             this.props.setResult(result);
         });
         this.socket.on("newPlayer", rmId => {
-            window.alert(`${this.props.player2} has joined the game`);
             const {currName, board} = this.props;
             const playerData = {
                 player2: currName,
@@ -85,6 +85,7 @@ class Room extends React.Component {
                 roomId: rmId
             };
             this.socket.emit("newPlayer", {...dataToSend});
+            window.alert(`${this.props.player2} has joined the game`);
         });
         this.socket.on("updateState", stateObj => this.props.updateState(stateObj));
         this.socket.on("playerLeft", async () => {
@@ -153,6 +154,13 @@ class Room extends React.Component {
                                     />
                                     <UpdateButtonStyles disabled={true}>Update</UpdateButtonStyles>
                                 </PlayerStyles>
+                                <CurrentPlayerStyles>
+                                    {
+                                        this.props.isChance === true
+                                        ? "Your chance"
+                                        : `${player2}'s chance`
+                                    }
+                                </CurrentPlayerStyles>
                                 <BoardContainerStyles>
                                     <Board
                                         multiplayer={true}

@@ -67,8 +67,15 @@ export const UpdateButtonStyles = styled.div`
 `;
 
 export const BoardContainerStyles = styled.div`
-    margin-top: 2rem;
+    margin-top: 1rem;
     @media only screen and (max-width: 768px) {
         margin-top: 0.2rem;
     }
+`;
+
+export const CurrentPlayerStyles = styled.span`
+    font-family: 'Patrick Hand', cursive;
+    font-size: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 0rem;
 `;
